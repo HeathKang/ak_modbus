@@ -1,0 +1,25 @@
+[modbus]
+    protocol = 'rtu'
+    port = 'COM5'
+    baudrate = 9600
+    bytesize = 8
+    stopbits = 1
+    parity = 'N'
+
+    addr = '0x00' # address of modbus
+    count = 10    # data numbers
+    unit = 1      # slave id of modbus
+
+[ak]
+    ip = '0.0.0.0' # server ip
+    port = 8002     # listen port
+
+[log]
+    console = true  # log console print
+    console_level = 'DEBUG'   #'DEBUG','INFO','WARNING','ERROR','CRITICAL'
+    file = true     # log file print
+    file_level = 'DEBUG'  #'DEBUG','INFO','WARNING','ERROR','CRITICAL'
+    log_file = 'logs/log.log' # log location
+    backup_count = 5 # log number
+    max_size = 10240 # log size
+    format_string = '(%(asctime)s), %(levelname)s, <%(threadName)s>, %(module)s, %(funcName)s, [%(lineno)d]: %(message)s' # log format

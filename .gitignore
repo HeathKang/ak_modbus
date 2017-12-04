@@ -1,0 +1,11 @@
+# logs directory
+logs/
+
+# test scripts
+test_scripts/
+
+# pycharm
+.idea/
+
+# py
+*.pyc
