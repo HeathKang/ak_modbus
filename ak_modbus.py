@@ -11,8 +11,6 @@ from sys import version_info
 from pymodbus.client.sync import ModbusSerialClient
 from log import setup_logging
 
-
-
 STX = 0x02
 ETX = 0x03
 BLANK = 0x20
@@ -34,9 +32,11 @@ def get_conf(conf_file_path='conf.toml'):
 
     return config
 
+
 conf = get_conf()
 setup_logging(conf['log'])
 log = logging.getLogger('ak_modbus')
+
 
 class modbus:
     def __init__(self, conf):
@@ -75,7 +75,6 @@ class modbus:
 
             log.error(e)
 
-
         return data_dict
 
     def close(self):
@@ -84,8 +83,7 @@ class modbus:
 
 class AK:
     def __init__(self, conf):
-        self.socket= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def build(self, conf):
         """
@@ -98,7 +96,6 @@ class AK:
         log.debug(address)
         self.socket.bind(address)
         self.socket.listen(5)
-
 
     def parse(self, data):
         """
@@ -115,12 +112,11 @@ class AK:
         cmd = b'ARES'
         fault_status = 0x00
 
-        buf = struct.pack(fmt, STX, BLANK, cmd, BLANK, fault_status, BLANK,  *d, ETX)
+        buf = struct.pack(fmt, STX, BLANK, cmd, BLANK, fault_status, BLANK, *d, ETX)
 
         return buf
 
     def connect(self):
-
         self.connection, addr = self.socket.accept()
         log.debug(self.connection)
         log.debug(addr)
@@ -199,8 +195,6 @@ class Connections:
 
 
 def main():
-
-
     mod = modbus(conf['modbus'])
     ak = AK(conf['ak'])
 
@@ -208,19 +202,5 @@ def main():
     coon.run()
 
 
-
-
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-

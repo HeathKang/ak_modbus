@@ -29,12 +29,12 @@ def setup_logging(conf):
     formatter = logging.Formatter(format_string, datefmt='%Y-%d-%m %H:%M:%S')
 
     if file:
-        # 如果 log 文本不存在，创建文本
+        # create logs directory if doesn't exist
         dir_path = os.path.dirname(logfile)
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
 
-        # 实例化一个 rotate file 的处理器，让日志文件旋转生成
+        # instantiate a rotate file handler to output log file
         fh = logging.handlers.RotatingFileHandler(filename=logfile, mode='a', maxBytes=max_size,
                                                   backupCount=backup_count, encoding='utf-8')
         fh.setLevel(level[file_level])
@@ -42,7 +42,7 @@ def setup_logging(conf):
         log.addHandler(fh)
 
     if console:
-        # 实例化一个流式处理器，将日志输出到终端
+        # instantiate a stream handler to output log file in console
         ch = logging.StreamHandler()
         ch.setLevel(level[console_level])
         ch.setFormatter(formatter)
